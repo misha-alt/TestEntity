@@ -46,6 +46,14 @@ private PersonService personService;
         return modelAndView;
     }
 
+    @GetMapping("/{id}")
+    public String edit (@PathVariable("id") int id, Model model){
+        Person person  = personService.grtById(id);
+        model.addAttribute("person",person);
+        return "people/edit";
+
+    }
+
    /* @GetMapping("/{id}")
     public String edit (@PathVariable("id") int id, Model model){
         Person person  = personService.grtById(id);
