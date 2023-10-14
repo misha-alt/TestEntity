@@ -1,5 +1,6 @@
 package misha.service;
 
+import misha.model.Course;
 import misha.model.Person;
 import org.springframework.ui.Model;
 
@@ -11,5 +12,5 @@ public interface PersonService {
     void add(Person person);
     void delete(Person person);
     void edit(Person person);
-    Person grtById(int iD);
+    Person grtById(Long iD);
 }

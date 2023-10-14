@@ -10,17 +10,19 @@ import jakarta.validation.constraints.Null;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/*import javax.persistence.*;*/
 
 
 @Entity
 @Table(name = "PERSON")
 public class Person {
     @Id
-//    @Null
     @Column(name = "ID")
-
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
 
     @Column(name= "NAME")
@@ -32,10 +34,15 @@ public class Person {
     @Column(name = "EMAIL")
     private String email;
 
+
+    @ManyToMany( fetch = FetchType.EAGER)
+    @JoinTable(name = "PERSON_COURSE", joinColumns = @JoinColumn(name = "PERSON_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    private Set<Course> courseSet;
+
     public Person() {
 
     }
-
 
 
 
@@ -69,6 +76,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Course> getCourseSet() {
+        return courseSet;
+    }
+
+    public void setCourseSet(Set<Course> courseSet) {
+        this.courseSet = courseSet;
     }
 }
 

@@ -5,13 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<form  th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}" method="POST">
+<form  th:action="@{/people/update/{id}(id=${person.getId()})}" th:object="${person}" th:method="PATCH">
     <a th:text="${person.getId()}"></a>
-    <label for="id">Enter id</label>
-    <input type="text" th:field="*{id}" value="${person.getId()}" id="id"/>
+
+
+
 
     <label for="name">Enter name</label>
-    <input type="text" th:field="*{name}" id="name"/>
+    <input type="hidden" th:field="*{name}" id="name"/>
     <br/>
     <label for="age">Enter age</label>
     <input type="text" th:field="*{age}" id="age"/>
@@ -19,8 +20,27 @@
     <label for="email">Enter email</label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>
+
+    <br/>
+    <!--выбор категории билета-->
+    <label for="corce">Select category:</label>
+    <select name="corce" id="corce">
+
+            <option th:each="object : ${courseList}" th:text="${object.getCourses()}" th:value="${object.getId()}"></option>
+
+    </select>
+
     <input type="submit" value="Update"/>
 </form>
 
+<a th:href="@{/course/stades/{id} (id=${person.getId()})}">course</a>
+
+
+
+
+
+
+
 </body>
 </html>
+<!--<form  th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}" th:method="PATCH">-->

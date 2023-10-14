@@ -3,6 +3,7 @@ package misha.service;
 import misha.dao.PersonDAO;
 import misha.dao.PersonDAOImpl;
 
+import misha.model.Course;
 import misha.model.Person;
 import misha.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void edit(Person person) {
-        personDAO.delete(person);
+        personDAO.edit(person);
 
     }
 
     @Override
-    public Person grtById(int id) {
+    public Person grtById(Long id) {
 
         return  personDAO.grtById(id);
     }
