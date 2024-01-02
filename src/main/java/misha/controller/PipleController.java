@@ -123,6 +123,22 @@ public class PipleController {
 
         return "people/show";
     }
+
+    @GetMapping("/test")
+
+    public String testController(Model model){
+
+        Person person = personDAO.grtById(1L);
+
+
+
+        model.addAttribute("testAtr", person.getRoleOfPersonSet());
+
+
+        return "people/test";
+    }
+
+
     /*@GetMapping("/test/{id}")
     public String testController (Model model,@ModelAttribute("person") Person person,@PathVariable Long id2, @RequestParam("couce") Long id){
         Course course = courseDAO.grtById(id);

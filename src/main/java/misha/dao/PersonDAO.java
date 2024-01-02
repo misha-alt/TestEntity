@@ -15,6 +15,7 @@ public interface PersonDAO {
     void edit(Person person);
     Person grtById(Long iD);
     void saveOrUpdate(Person person);
+    Person getByName(String name);
 
 
 }

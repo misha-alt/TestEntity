@@ -13,4 +13,5 @@ public interface PersonService {
     void delete(Person person);
     void edit(Person person);
     Person grtById(Long iD);
+    Person getByName(String name);
 }

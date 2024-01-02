@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
@@ -17,22 +19,28 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SwcurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/people").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
 
-                /*.and()
+                .and()
                 .formLogin()
                 .and()
-                .logout().logoutSuccessUrl("/new");*/
+                .logout().logoutSuccessUrl("/new");
 
     }
 
-  /*  @Bean
+    /*@Bean
     public UserDetailsService users()  {
         UserDetails user = User.builder()
                 .username("user")
@@ -46,9 +54,9 @@ public class SwcurityConfig extends WebSecurityConfigurerAdapter {
                 .build();
         return new InMemoryUserDetailsManager(user,admin);
     }*/
-@Bean
+/*@Bean
    public JdbcUserDetailsManager users (DataSource dataSource){
- /*   UserDetails user = User.builder()
+    UserDetails user = User.builder()
             .username("USER")
             .password("{bcrypt}$2a$12$XkA40MDkbhYw7BJ3ZBix1ehEA7FFNXfQSr4fNwotBuYF0NsDXsiKq")
             .roles("USER")
@@ -57,10 +65,10 @@ public class SwcurityConfig extends WebSecurityConfigurerAdapter {
             .username("ADMIN")
             .password("{bcrypt}$2a$12$XkA40MDkbhYw7BJ3ZBix1ehEA7FFNXfQSr4fNwotBuYF0NsDXsiKq")
             .roles("USER","ADMIN")
-            .build();*/
+            .build();
     JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-  /*  jdbcUserDetailsManager.createUser(user);
-    jdbcUserDetailsManager.createUser(admin);*/
+    jdbcUserDetailsManager.createUser(user);
+    jdbcUserDetailsManager.createUser(admin);
     return jdbcUserDetailsManager;
-}
+}*/
 }

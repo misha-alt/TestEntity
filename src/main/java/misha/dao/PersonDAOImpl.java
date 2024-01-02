@@ -3,6 +3,7 @@ import misha.model.Course;
 import misha.model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -81,5 +82,13 @@ public class PersonDAOImpl implements PersonDAO {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(person);
 
+    }
+
+    @Override
+    public Person getByName(String name) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Person u where u.name = :name");
+        query.setParameter("name", name);
+        List <Person>  personList =  query.list();
+        return personList.get(0);
     }
 }

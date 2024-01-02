@@ -53,4 +53,8 @@ public class PersonServiceImpl implements PersonService {
         return  personDAO.grtById(id);
     }
 
+    @Override
+    public Person getByName(String name) {
+        return  personDAO.getByName(name);
+    }
 }

@@ -5,13 +5,7 @@ package misha.model;
 
 
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /*import javax.persistence.*;*/
@@ -39,6 +33,16 @@ public class Person {
     @JoinTable(name = "PERSON_COURSE", joinColumns = @JoinColumn(name = "PERSON_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private Set<Course> courseSet;
+
+
+    @ManyToMany( fetch = FetchType.EAGER)
+    @JoinTable(name = "PERSON_ROLES", joinColumns = @JoinColumn(name = "PERSON_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PERSONROLE_ID"))
+    private Set<RoleOfPerson> roleOfPersonSet;
+
+
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+    private PasswordClass password;
 
     public Person() {
 
@@ -84,6 +88,22 @@ public class Person {
 
     public void setCourseSet(Set<Course> courseSet) {
         this.courseSet = courseSet;
+    }
+
+    public Set<RoleOfPerson> getRoleOfPersonSet() {
+        return roleOfPersonSet;
+    }
+
+    public void setRoleOfPersonSet(Set<RoleOfPerson> roleOfPersonSet) {
+        this.roleOfPersonSet = roleOfPersonSet;
+    }
+
+    public PasswordClass getPassword() {
+        return password;
+    }
+
+    public void setPassword(PasswordClass password) {
+        this.password = password;
     }
 }
 
