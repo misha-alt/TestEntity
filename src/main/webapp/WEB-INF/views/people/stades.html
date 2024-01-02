@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<div th:if="${courceSet!=null&&!courceSet.isEmpty()}">
+    <div th:each="com:${courceSet}">
+        <a th:text="${com.getCourses()}"></a>
+    </div>
+    <a th:text="${courceSetEmpty}"></a>
+</div>
+     <!--<a th:text="${cources}"></a>-->
+
+
+<form method="POST" th:action="@{/course/{id}(id=${person.getId()})}" th:object="${coursess}">
+    <label for="cateorySelect">Select category:</label>
+    <select name="cateorySelect" id="cateorySelect" style="width: 200px;">
+        <option th:each="viewCources : ${cources}" th:value="${viewCources.getId()}" th:text="${viewCources.getCourses()}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+
+
+</body>
+</html>

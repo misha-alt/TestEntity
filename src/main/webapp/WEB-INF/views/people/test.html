@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<a th:text="${testAtr}"></a>-->
+
+
+
+<div th:each="person:${testAtr}">
+    <a th:text="${person.getRole_name()}"></a>
+</div>
+
+<!--<br/>
+<a th:text="${id}"></a>
+<br/>
+<a th:text="${cou}"></a>-->
+
+
+</body>
+</html>
